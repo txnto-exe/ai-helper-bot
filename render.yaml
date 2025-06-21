@@ -2,8 +2,9 @@ services:
   - type: web
     name: ai-helper-bot
     env: python
-    buildCommand: ""
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "python bot.py"
     envVars:
       - key: BOT_TOKEN
-        value: 7881957521:AAFA1klvJnCL5JFIlQCwi5_NBqtu5odDef8
+        sync: false
+    autoDeploy: true

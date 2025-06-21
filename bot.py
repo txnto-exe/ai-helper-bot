@@ -1,35 +1,17 @@
 import telebot
+import os
 
-# 🔒 ВСТАВЬ СЮДА СВОЙ ТОКЕН от BotFather
-BOT_TOKEN = "7881957521:AAFA1klvJnCL5JFIlQCwi5_NBqtu5odDef8"
-
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(BOT_TOKEN)
 
-# Обработчик команды /start
 @bot.message_handler(commands=['start'])
-def send_welcome(message):
-    welcome_text = (
-        "👋 Привет! Я бот-помощник AI Helper.\n\n"
-        "📌 Вот что я умею:\n"
-        "- Автоматически публиковать новости\n"
-        "- Отвечать на команды\n"
-        "- Помогать с Telegram-каналом\n\n"
-        "Напиши /help чтобы узнать больше!"
-    )
-    bot.send_message(message.chat.id, welcome_text)
+def start(message):
+    bot.send_message(message.chat.id,
+                     "Привет! Я AI Helper (HIT) 🤖\n\n"
+                     "Мои возможности:\n"
+                     "- 📥 Скачать TikTok без водяного знака\n"
+                     "- 📥 Скачать YouTube в HD\n"
+                     "- 🖼 Генерация картинок (3 в день)\n"
+                     "- 📝 Генерация текстов (песни, поздравления, речи)")
 
-# Обработчик команды /help
-@bot.message_handler(commands=['help'])
-def send_help(message):
-    help_text = (
-        "🤖 Доступные команды:\n"
-        "/start – Приветствие и описание функций\n"
-        "/help – Помощь по командам\n"
-        # Добавь свои команды здесь
-    )
-    bot.send_message(message.chat.id, help_text)
-
-# Запуск бота (вечный цикл)
-if __name__ == "__main__":
-    print("✅ Бот запущен...")
-    bot.infinity_polling()
+bot.polling()
